@@ -47,18 +47,15 @@ public class Leetcode2 {
         }
 
         private ListNode add(ListNode l1, ListNode l2, boolean carry) {
-            if (l1 == null && l2 == null && carry) {
-                return new ListNode(1);
+            if (l1 == null && l2 == null) {
+                if (carry) {
+                    return new ListNode(1);
+                } else {
+                    return null;
+                }
             }
             if (l1 == null) {
-                if (carry) {
-                    l2.val+=1;
-                    if (l2.val > 9) {
-                        l2.val -= 10;
-                        l2.next = add(l1, l2.next, true);
-                    }
-                }
-                return l2;
+                return add(l2, l1, carry);
             }
             if (l2 == null) {
                 if (carry) {
